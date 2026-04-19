@@ -108,4 +108,35 @@ public class ReservationService{
         }
         conn.close();
     }
+    
+    public void userLogin(Scanner sc) throws Exception{
+        Connection conn = DBConnection.getConnection();
+        System.out.println("Enter your email address: ");
+        String email=sc.next();
+
+        System.out.println("Enter your password: ");
+        String password=sc.next();
+
+        String sql="SELECT COUNT(*) FROM customers WHERE cust_email=? and cust_password=?";
+        PreparedStatement userLogin=conn.prepareStatement(sql);
+        userLogin.setString(1, email);
+        userLogin.setString(2, password);
+        int rs=userLogin.executeUpdate();
+        if(rs>0){
+            System.out.println("User login successfull.");
+            while(true){
+                System.out.println("\n---User Menu---");
+                System.out.println("1. Book Ticket");
+                System.out.println("2. View Bookings");
+                System.out.println("3. Cancel Booking");
+                int choice=sc.nextInt();
+                switch(choice){
+                    
+                }
+            }
+        }
+        else{
+            System.out.println("Invalid email or password");
+        }
+    }
 }
