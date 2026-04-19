@@ -110,6 +110,7 @@ public class ReservationService{
     }
     
     public void userLogin(Scanner sc) throws Exception{
+        userActions userActions = new userActions();
         Connection conn = DBConnection.getConnection();
         System.out.println("Enter your email address: ");
         String email=sc.next();
@@ -131,9 +132,9 @@ public class ReservationService{
                 System.out.println("3. Cancel Booking");
                 int choice=sc.nextInt();
                 switch(choice){
-                    case 1-> System.out.println("Booking ticket functionality coming soon.");
-                    case 2-> System.out.println("View bookings functionality coming soon.");
-                    case 3-> System.out.println("Cancel booking functionality coming soon.");
+                    case 1-> userActions.bookTicket(sc, email);
+                    case 2-> userActions.viewBookings(email);
+                    case 3-> userActions.cancelBooking(sc, email);
                     case 4-> {
                         System.out.println("Exiting user menu.");
                         return;
