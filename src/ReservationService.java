@@ -23,13 +23,13 @@ public class ReservationService{
             String dob=sc.next();
 
             System.out.println("Enter your mobile number");
-            int mobileNumber =sc.nextInt();
+            long mobileNumber = sc.nextLong();
 
             String sql="INSERT INTO customers(cust_name, cust_dob, cust_mobile_number, cust_email, cust_password) VALUES (?,?,?,?,?)";
             PreparedStatement insertUser = conn.prepareStatement(sql);
             insertUser.setString(1,name);
             insertUser.setString(2,dob);
-            insertUser.setInt(3,mobileNumber);
+            insertUser.setLong(3,mobileNumber);
             insertUser.setString(4,email);
             insertUser.setString(5,password);
             insertUser.executeUpdate();
@@ -50,7 +50,7 @@ public class ReservationService{
         System.out.println("Enter your password: ");
         String password=sc.next();
 
-        String sql="SELECT COUNT(*) FROM customers WHERE cust_email=? and password=? and admin='Y'";
+        String sql="SELECT COUNT(*) FROM customers WHERE cust_email=? and cust_password=? and admin='Y'";
         PreparedStatement adminLogin = conn.prepareStatement(sql);
         adminLogin.setString(1, email);
         adminLogin.setString(2, password);
@@ -61,7 +61,7 @@ public class ReservationService{
             System.out.println("\n---Train Management---");
             System.out.println("1. Add Train");
             System.out.println("2. Update Train information");
-            System.out.println("Delete train information");
+            System.out.println("3. Delete train information");
             int choice=sc.nextInt();
             switch(choice) 
             {
@@ -121,8 +121,8 @@ public class ReservationService{
         PreparedStatement userLogin=conn.prepareStatement(sql);
         userLogin.setString(1, email);
         userLogin.setString(2, password);
-        int rs=userLogin.executeUpdate();
-        if(rs>0){
+        ResultSet rs = userLogin.executeQuery();
+        if (rs.next() && rs.getInt(1) > 0) {
             System.out.println("User login successfull.");
             while(true){
                 System.out.println("\n---User Menu---");
@@ -131,7 +131,13 @@ public class ReservationService{
                 System.out.println("3. Cancel Booking");
                 int choice=sc.nextInt();
                 switch(choice){
-                    
+                    case 1-> System.out.println("Booking ticket functionality coming soon.");
+                    case 2-> System.out.println("View bookings functionality coming soon.");
+                    case 3-> System.out.println("Cancel booking functionality coming soon.");
+                    case 4-> {
+                        System.out.println("Exiting user menu.");
+                        return;
+                    }
                 }
             }
         }

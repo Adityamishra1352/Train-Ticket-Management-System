@@ -23,7 +23,7 @@ public class TrainManagement{
         System.out.println("Enter the total number of seats: ");
         int trainTotalSeats=sc.nextInt();
 
-        String sql="INSERT INTO train_info(train_name, source_station, destination_station, time_of departure, time_of_arrival, total_seats) VALUES (?,?,?,?,?,?)";
+        String sql="INSERT INTO train_info(train_name, source_station, destination_station, time_of_departure, time_of_arrival, total_seats) VALUES (?,?,?,?,?,?)";
         PreparedStatement addTrain= conn.prepareStatement(sql);
         addTrain.setString(1, trainName);
         addTrain.setString(2, trainSource);
